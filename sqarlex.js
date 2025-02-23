@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, Partials } = require("discord.js");
 const Discord = require("discord.js");
 const fs = require("fs");
+const punycode = require('punycode'); // Add this line if punycode is used
 
 const config = require("./config.json");
 

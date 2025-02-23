@@ -9,9 +9,10 @@
   "author": "sqarlex",
   "dependencies": {
     "discord.js": "^14.7.1",
-    "gamedig": "^4.0.5"
+    "gamedig": "^4.0.5",
+    "punycode": "^2.1.1"
   },
-    "engines": {
+  "engines": {
     "node": "16.x"
   }
 }
