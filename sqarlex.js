@@ -31,7 +31,7 @@ for (let commandName of fs.readdirSync("./commands")) {
     type: 1,
   });
 
-  console.log(`[COMANDO] ${commandName} comando cargado exitosamente.`);
+  console.log(`[COMANDO] ${commandName} comando carregado exitosamente.`);
 }
 
 for (let eventName of fs.readdirSync("./events")) {
@@ -49,7 +49,7 @@ for (let eventName of fs.readdirSync("./events")) {
     });
   }
 
-  console.log(`[EVENT] ${eventName} evento cargado exitosamente.`);
+  console.log(`[EVENT] ${eventName} evento carregado exitosamente.`);
 }
 
 client.once("ready", async () => {
