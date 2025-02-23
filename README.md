@@ -47,4 +47,3 @@ O projeto não funcionará se o seu servidor MTA não estiver em execução.
 
 ![Screenshot 1](224495541-66f3b4bd-7827-4601-8c18-6bbf6518e64a.png)
 ![Screenshot 2](224495543-cb6cc59e-8311-4dc5-a922-a42113f35261.png)
-```
