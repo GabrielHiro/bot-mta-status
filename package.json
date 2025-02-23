@@ -1,0 +1,17 @@
+{
+  "name": "status-server-bot",
+  "version": "1.0.0",
+  "description": "MTA Bot - Discord",
+  "main": "sqarlex.js",
+  "scripts": {
+    "start": "node sqarlex.js"
+  },
+  "author": "sqarlex",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "gamedig": "^4.0.5"
+  },
+    "engines": {
+    "node": "16.x"
+  }
+}
