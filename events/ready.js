@@ -10,9 +10,9 @@ const {
 const SERVER_STATUS_ONLINE = '```diff\n+[🟢 Online]\n```';
 const SERVER_STATUS_OFFLINE = '```[🔴 Offline]```';
 const FOOTER_TEXT = "Sistema AutoConnect - HiroFKW";
-const FOOTER_ICON_URL = "https://imgur.com/eaoPB0S.png";
+const FOOTER_ICON_URL = "https://imgur.com/oHouJ74";
 const BUTTON_LABEL = 'Servidor HiroFKW';
-const BUTTON_URL = 'https://discord.gg/4e9QUvZ7xP';
+const BUTTON_URL = 'https://discord.gg/';
 const CHANNEL_ID = "1004537410685767781";
 
 module.exports = {
