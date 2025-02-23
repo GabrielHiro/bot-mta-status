@@ -17,7 +17,7 @@ Este projeto é uma continuação de um repositório anterior que foi perdido. A
    npm install
    ```
 
-3. Preencha corretamente os campos no arquivo [config.json]().
+3. Preencha corretamente os campos no arquivo [config.json](./config.json).
 
 4. Inicie o bot:
    ```sh
