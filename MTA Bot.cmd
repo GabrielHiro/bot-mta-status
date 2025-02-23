@@ -1,3 +1,3 @@
-cd C:\Users\Tony\Documents\Bots/Rolas3
+cd 
 cls
 node .
