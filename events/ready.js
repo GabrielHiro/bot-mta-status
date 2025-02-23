@@ -20,7 +20,13 @@ module.exports = {
   once: true,
 
   async execute(client, config) {
-    console.log(`[BOT] ${client.user.tag} está ativo.`);
+
+    
+    console.log("\n");
+    console.log('\x1b[37m%s\x1b[0m', `                               > Estou online em ${client.user.username} <`);
+    console.log('\x1b[37m%s\x1b[0m', `                                > Estou em ${client.guilds.cache.size}, Servidores <`);
+    console.log('\x1b[37m%s\x1b[0m', `                                 > Tenho ${client.users.cache.size} usuários <`);
+    console.log('\x1b[37m%s\x1b[0m', `1.0.0`);
 
     const server = config.server;
 
