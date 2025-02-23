@@ -1,0 +1,9 @@
+{
+  "token": "<TOKEN-DO-BOT>", 
+  "server": {
+    "ip": "<ip-do-servidor>", 
+    "port": "<porta-do-servidor>" 
+  },
+  "color": "#6f00ff", 
+  "duration": 120000 
+}
