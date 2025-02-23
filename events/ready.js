@@ -52,14 +52,14 @@ module.exports = {
               inline: false 
             }
           )
-          .setFooter({ text: "Sistema AutoConnect - Rolas V1", iconURL: "https://imgur.com/eaoPB0S.png" })
+          .setFooter({ text: "Sistema AutoConnect - HiroFKW ", iconURL: "https://imgur.com/eaoPB0S.png" })
           .setTimestamp();
 
         // Criação do botão
         const row = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
-              .setLabel('Servidor Rolas')
+              .setLabel('Servidor HiroFKW')
               .setURL('https://discord.gg/4e9QUvZ7xP')
               .setStyle(ButtonStyle.Link)
           );
