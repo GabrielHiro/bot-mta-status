@@ -7,6 +7,14 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 
+const SERVER_STATUS_ONLINE = '```diff\n+[🟢 Online]\n```';
+const SERVER_STATUS_OFFLINE = '```[🔴 Offline]```';
+const FOOTER_TEXT = "Sistema AutoConnect - HiroFKW";
+const FOOTER_ICON_URL = "https://imgur.com/eaoPB0S.png";
+const BUTTON_LABEL = 'Servidor HiroFKW';
+const BUTTON_URL = 'https://discord.gg/4e9QUvZ7xP';
+const CHANNEL_ID = "1004537410685767781";
+
 module.exports = {
   name: Events.ClientReady,
   once: true,
@@ -16,17 +24,17 @@ module.exports = {
 
     const server = config.server;
 
-    // Função para atualizar o embed com o status do servidor
+    // Function to update the embed with the server status
     async function updateEmbed() {
       try {
         const mtasa = await gamedig.query({
           type: "mtasa",
           host: server.ip,
           port: server.port,
-          socketTimeout: 5000, // 5000 ms (5 segundos)
+          socketTimeout: 5000, // 5000 ms (5 seconds)
         });
 
-        // Criação do embed com as informações do servidor
+        // Create the embed with server information
         const embed = new EmbedBuilder()
           .setColor("#6f00ff")
           .setTitle(`${mtasa.name}`)
@@ -43,37 +51,37 @@ module.exports = {
             }, 
             { 
               name: "Status do servidor", 
-              value: mtasa.raw.numplayers > 0 ? '```diff\n+[🟢 Online]\n```' : "```[🔴 Offline]```", 
+              value: mtasa.raw.numplayers > 0 ? SERVER_STATUS_ONLINE : SERVER_STATUS_OFFLINE, 
               inline: true 
             },
             { 
               name: "Como entrar?", 
-              value: '```1. Abra FiveM \n2. Pressione F8 no seu teclado. \n3. Cole "connect 45.89.30.242:30120"\n4. Você já pode entrar!```', 
+              value: '```1. Abra FiveM \n2. Pressione F8 no seu teclado. \n3. Cole "connect "\n4. Você já pode entrar!```', 
               inline: false 
             }
           )
-          .setFooter({ text: "Sistema AutoConnect - HiroFKW ", iconURL: "https://imgur.com/eaoPB0S.png" })
+          .setFooter({ text: FOOTER_TEXT, iconURL: FOOTER_ICON_URL })
           .setTimestamp();
 
-        // Criação do botão
+        // Create the button
         const row = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
-              .setLabel('Servidor HiroFKW')
-              .setURL('https://discord.gg/4e9QUvZ7xP')
+              .setLabel(BUTTON_LABEL)
+              .setURL(BUTTON_URL)
               .setStyle(ButtonStyle.Link)
           );
 
-        const channel = client.channels.cache.get("1004537410685767781");
+        const channel = client.channels.cache.get(CHANNEL_ID);
         const messageId = config.messageId;
 
-        // Tentar editar a mensagem existente, se não existir, criar uma nova
+        // Try to edit the existing message, if not exist, create a new one
         try {
           const message = await channel.messages.fetch(messageId);
-          await message.edit({ embeds: [embed], components: [row] }); // Adicionar o botão à mensagem
+          await message.edit({ embeds: [embed], components: [row] });
         } catch (error) {
-          const sentMessage = await channel.send({ embeds: [embed], components: [row] }); // Adicionar o botão à nova mensagem
-          config.messageId = sentMessage.id; // Salvar o novo ID da mensagem se não for possível encontrar um anterior
+          const sentMessage = await channel.send({ embeds: [embed], components: [row] });
+          config.messageId = sentMessage.id; // Save the new message ID if the previous one is not found
         }
 
       } catch (error) {
@@ -81,10 +89,10 @@ module.exports = {
       }
     }
 
-    // Chamada inicial
+    // Initial call
     updateEmbed();
 
-    // Atualizar a cada intervalo de tempo definido
+    // Update at the defined interval
     setInterval(updateEmbed, config.duration);
   },
 };
