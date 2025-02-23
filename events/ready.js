@@ -12,10 +12,11 @@ module.exports = {
   once: true,
 
   async execute(client, config) {
-    console.log(`[BOT] ${client.user.tag} está activo.`);
+    console.log(`[BOT] ${client.user.tag} está ativo.`);
 
     const server = config.server;
 
+    // Função para atualizar o embed com o status do servidor
     async function updateEmbed() {
       try {
         const mtasa = await gamedig.query({
@@ -24,62 +25,66 @@ module.exports = {
           port: server.port,
           socketTimeout: 5000, // 5000 ms (5 segundos)
         });
-        const embed = new EmbedBuilder()
-        .setColor("#6f00ff")
-        .setTitle(`${mtasa.name}`)
-        .addFields(
-          { 
-            name: "IP del servidor", 
-            value: `\`\`\`ini\nconnect ${mtasa.connect}\n\`\`\``, 
-            inline: false 
-        },        
-        { name: "Jugadores online", 
-          value: `\`\`\`ini\n[ ${mtasa.raw.numplayers} / ${mtasa.maxplayers} ]\n\`\`\``, 
-          inline: true
-        }, 
-        { name: "Estado del servidor", 
-          value: mtasa.raw.numplayers > 0 ? '```diff\n+[🟢 Online]\n```' : "```[🔴 Offline]```", 
-          inline: true 
-        },
-        { name: "¿Como entrar?", 
-          value: '```1. Abre FiveM \n2. Toca F8 en tu teclado. \n3. Pega "connect 45.89.30.242:30120"\n4. ¡Ya puedes entrar!```', 
-          inline: false 
-        }
-        )
-        .setFooter({ text: "Sistema AutoConnect - Rolas V1", iconURL: "https://imgur.com/eaoPB0S.png" })
-        .setTimestamp();
 
-        // Aquí agregamos el botón
+        // Criação do embed com as informações do servidor
+        const embed = new EmbedBuilder()
+          .setColor("#6f00ff")
+          .setTitle(`${mtasa.name}`)
+          .addFields(
+            { 
+              name: "IP do servidor", 
+              value: `\`\`\`ini\nconnect ${mtasa.connect}\n\`\`\``, 
+              inline: false 
+            },        
+            { 
+              name: "Jogadores online", 
+              value: `\`\`\`ini\n[ ${mtasa.raw.numplayers} / ${mtasa.maxplayers} ]\n\`\`\``, 
+              inline: true 
+            }, 
+            { 
+              name: "Status do servidor", 
+              value: mtasa.raw.numplayers > 0 ? '```diff\n+[🟢 Online]\n```' : "```[🔴 Offline]```", 
+              inline: true 
+            },
+            { 
+              name: "Como entrar?", 
+              value: '```1. Abra FiveM \n2. Pressione F8 no seu teclado. \n3. Cole "connect 45.89.30.242:30120"\n4. Você já pode entrar!```', 
+              inline: false 
+            }
+          )
+          .setFooter({ text: "Sistema AutoConnect - Rolas V1", iconURL: "https://imgur.com/eaoPB0S.png" })
+          .setTimestamp();
+
+        // Criação do botão
         const row = new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
-        .setLabel('Servidor Rolas')
-        .setURL('https://discord.gg/4e9QUvZ7xP')
-        .setStyle(ButtonStyle.Link)
+              .setLabel('Servidor Rolas')
+              .setURL('https://discord.gg/4e9QUvZ7xP')
+              .setStyle(ButtonStyle.Link)
           );
-
 
         const channel = client.channels.cache.get("1004537410685767781");
         const messageId = config.messageId;
 
-        // Intentar editar el mensaje existente, si no existe, crear uno nuevo
+        // Tentar editar a mensagem existente, se não existir, criar uma nova
         try {
           const message = await channel.messages.fetch(messageId);
-          message.edit({ embeds: [embed], components: [row] }); // Agregar el botón al mensaje
+          await message.edit({ embeds: [embed], components: [row] }); // Adicionar o botão à mensagem
         } catch (error) {
-          const sentMessage = await channel.send({ embeds: [embed], components: [row] }); // Agregar el botón al mensaje nuevo
-          config.messageId = sentMessage.id; // Guardar el nuevo ID del mensaje si no se puede encontrar uno previo
+          const sentMessage = await channel.send({ embeds: [embed], components: [row] }); // Adicionar o botão à nova mensagem
+          config.messageId = sentMessage.id; // Salvar o novo ID da mensagem se não for possível encontrar um anterior
         }
 
       } catch (error) {
-        console.error("[Error] No se pudo obtener el estado del servidor:", error);
+        console.error("[Erro] Não foi possível obter o status do servidor:", error);
       }
     }
 
-    // Llamada inicial
+    // Chamada inicial
     updateEmbed();
 
-    // Actualizar cada cierto tiempo
+    // Atualizar a cada intervalo de tempo definido
     setInterval(updateEmbed, config.duration);
   },
 };
