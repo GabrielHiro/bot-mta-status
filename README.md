@@ -7,9 +7,9 @@ Este projeto é uma continuação de um repositório anterior que foi perdido. A
 ## Instalação
 
 1. Clone o repositório:
-   ```sh
-   git clone 
-   cd 
+   ```sh 
+   git clone https://github.com/GabrielHiro/bot-mta-status.git
+   cd bot-mta-status
    ```
 
 2. Instale as dependências:
